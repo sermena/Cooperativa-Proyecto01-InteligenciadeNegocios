@@ -1,0 +1,3 @@
+# etl/apache-hop/pipelines
+
+Transformaciones de Apache Hop (`.hpl`), una por dimensión o tabla de hechos: `carga_dim_agencia.hpl`, `carga_fact_credito.hpl`, ...
