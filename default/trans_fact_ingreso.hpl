@@ -17,17 +17,32 @@
   <transform>
     <type>TableInput</type>
     <name>Table input</name>
-    <sql>SELECT 
-    i.id_interes AS id_ingreso_oltp,
-    i.id_credito AS id_credito_oltp,
+    <sql>-- Ingresos por intereses
+SELECT 
+    cr.id_credito AS id_credito_oltp,
+    cr.id_cliente,
+    cr.id_producto,
+    cr.id_agencia,
     i.fecha_devengo AS fecha_ingreso,
     i.monto_interes AS monto_ingreso,
-    'FOR' AS codigo_concepto, -- O 'AVA' / 'GCO' según corresponda
-    c.id_cliente,
-    c.id_producto,
-    c.id_agencia
+    'FOR' AS codigo_concepto -- O el código real que corresponda al tipo de interés en tu DW
 FROM interes i
-INNER JOIN credito c ON i.id_credito = c.id_credito;</sql>
+JOIN credito cr ON i.id_credito = cr.id_credito
+
+UNION ALL
+
+-- Ingresos por comisiones (unidas con tipo_comision para obtener su código)
+SELECT 
+    cr.id_credito AS id_credito_oltp,
+    cr.id_cliente,
+    cr.id_producto,
+    cr.id_agencia,
+    c.fecha_cobro AS fecha_ingreso,
+    c.monto_comision AS monto_ingreso,
+    tc.codigo_comision AS codigo_concepto
+FROM comision c
+JOIN credito cr ON c.id_credito = cr.id_credito
+JOIN tipo_comision tc ON tc.id_tipo_comision = c.id_tipo_comision</sql>
     <limit>0</limit>
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
@@ -65,7 +80,7 @@ INNER JOIN credito c ON i.id_credito = c.id_credito;</sql>
       <value>
         <name>sk_tiempo</name>
         <rename>sk_tiempo</rename>
-        <default/>
+        <default>1</default>
         <type>Integer</type>
         <trim_type>none</trim_type>
       </value>
