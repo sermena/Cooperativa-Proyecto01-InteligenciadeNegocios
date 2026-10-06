@@ -1,0 +1,29 @@
+{
+  "variables" : [
+    {
+      "name" : "DB_OLTP_HOSTNAME",
+      "value" : "",
+      "description" : "Hostname for database connection DB_OLTP"
+    },
+    {
+      "name" : "DB_OLTP_PORT",
+      "value" : "5432",
+      "description" : "Port for database connection DB_OLTP"
+    },
+    {
+      "name" : "DB_OLTP_DATABASE",
+      "value" : "coopebi_oltp",
+      "description" : "Database name for database connection DB_OLTP"
+    },
+    {
+      "name" : "DB_OLTP_USERNAME",
+      "value" : "postgres",
+      "description" : "Username for database connection DB_OLTP"
+    },
+    {
+      "name" : "DB_OLTP_PASSWORD",
+      "value" : "Sarita2004.",
+      "description" : "Password for database connection DB_OLTP"
+    }
+  ]
+}
